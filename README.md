@@ -91,7 +91,7 @@ Create a `.env` file inside the `server` directory with the following content:
 
 ```env
 # MongoDB connection URI
-MONGODB_URI=mongodb://localhost:27017/restaurant-bookings
+MONGODB_URI=
 # Or for MongoDB Atlas:
 # MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/restaurant-bookings
 
