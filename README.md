@@ -93,7 +93,7 @@ Create a `.env` file inside the `server` directory with the following content:
 # MongoDB connection URI
 MONGODB_URI=
 # Or for MongoDB Atlas:
-# MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/restaurant-bookings
+# MONGODB_URI=
 
 # LiveKit credentials
 LIVEKIT_API_KEY=your_livekit_api_key
