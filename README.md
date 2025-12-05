@@ -177,7 +177,7 @@ getWeather: llm.tool({
 
 ## 🎥 Demo Videos
 
-- Voice conversation flow with NLP and multiple users-https://drive.google.com/file/d/1axinSFlb5j_fzBs0V5LqIH2NI_opwjxs/view?usp=sharing
+- Voice conversation flow with NLP and  Handle variations in user input-https://drive.google.com/file/d/1axinSFlb5j_fzBs0V5LqIH2NI_opwjxs/view?usp=sharing
 - Full booking process including database saving-https://drive.google.com/file/d/19XhMQIHfXOD7sZLOEHqA0HCq2xPqsRah/view?usp=sharing
 - 
 
