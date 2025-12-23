@@ -7,7 +7,7 @@ app.use(cors());
 app.use(express.json());
 
 // --- 1. MONGODB CONNECTION ---
-const MONGO_URI = "mongodb+srv: ";
+const MONGO_URI = "";
 
 console.log("⏳ Connecting to MongoDB Cloud...");
 

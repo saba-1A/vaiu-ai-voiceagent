@@ -4,12 +4,15 @@ import {
   ServerOptions,
   cli,
   defineAgent,
-  inference,
   voice,
   llm,
 } from '@livekit/agents';
 import * as livekit from '@livekit/agents-plugin-livekit';
 import * as silero from '@livekit/agents-plugin-silero';
+// Import the direct provider plugins
+import * as deepgram from '@livekit/agents-plugin-deepgram';
+import * as openai from '@livekit/agents-plugin-openai';
+import * as cartesia from '@livekit/agents-plugin-cartesia';
 import { BackgroundVoiceCancellation } from '@livekit/noise-cancellation-node';
 import { z } from 'zod';
 import dotenv from 'dotenv';
@@ -35,7 +38,7 @@ class Assistant extends voice.Agent {
         --- FLOW ---
         1. Greet the user and ask for the first missing detail (usually Name).
         2. Continue asking for missing details one by one.
-        3. If the user gives a date/city, use 'getWeather' tool to suggest seating.
+        3. If the user gives a date/city, use 'getWeather' tool to suggest them the correct seating depending on the weather.
         4. FINAL CONFIRMATION: Say "Let me confirm everything: [Recap all details in a line]. Is this correct?"
         5. If they say YES: Use "createBooking" tool. Then say "Booked! See you then." and hang up.
       `,
@@ -49,7 +52,7 @@ class Assistant extends voice.Agent {
           }),
           execute: async ({ location }) => {
             console.log(`🌤️ Checking weather for ${location}...`);
-            const API_KEY = "ur-api-key"; 
+            const API_KEY = process.env.OPENWEATHER_API_KEY; 
             try {
               const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${API_KEY}&units=metric`;
               const res = await fetch(url);
@@ -102,9 +105,18 @@ export default defineAgent({
   },
   entry: async (ctx: JobContext) => {
     const session = new voice.AgentSession({
-      stt: new inference.STT({ model: 'assemblyai/universal-streaming', language: 'en' }),
-      llm: new inference.LLM({ model: 'openai/gpt-4o-mini' }), 
-      tts: new inference.TTS({ model: 'cartesia/sonic-3', voice: '9626c31c-bec5-4cca-baa8-f8ba9e84c8bc' }),
+      // 1. Use Deepgram directly (Faster & uses your DEEPGRAM_API_KEY)
+      stt: new deepgram.STT(),
+      
+      // 2. Use OpenAI directly (Uses your OPENAI_API_KEY)
+      llm: new openai.LLM({ model: 'gpt-4o-mini' }), 
+      
+      // 3. Use Cartesia directly (Uses your CARTESIA_API_KEY)
+      tts: new cartesia.TTS({ 
+        model: 'sonic-english', // standard model name for english
+        voice: '9626c31c-bec5-4cca-baa8-f8ba9e84c8bc' 
+      }),
+      
       turnDetection: new livekit.turnDetector.MultilingualModel(),
       vad: ctx.proc.userData.vad! as silero.VAD,
     });

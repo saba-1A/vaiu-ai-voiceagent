@@ -35,19 +35,20 @@
     "typescript-eslint": "^8.46.2"
   },
   "dependencies": {
-    "@livekit/agents": "^1.0.24",
-    "@livekit/agents-plugin-deepgram": "^1.0.24",
+    "@livekit/agents": "^1.0.30",
+    "@livekit/agents-plugin-cartesia": "^1.0.30",
+    "@livekit/agents-plugin-deepgram": "^1.0.30",
     "@livekit/agents-plugin-google": "^1.0.24",
     "@livekit/agents-plugin-livekit": "^1.0.21",
-    "@livekit/agents-plugin-openai": "^1.0.24",
-    "@livekit/agents-plugin-silero": "^1.0.24",
+    "@livekit/agents-plugin-openai": "^1.0.30",
+    "@livekit/agents-plugin-silero": "^1.0.30",
     "@livekit/noise-cancellation-node": "^0.1.9",
     "body-parser": "^2.2.1",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "livekit-server-sdk": "^2.14.2",
-    "mongoose": "^9.0.0",
+    "mongoose": "^9.0.2",
     "zod": "^3.25.76"
   }
 }
